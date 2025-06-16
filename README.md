@@ -1,2 +1,2 @@
 # HEATEQ
-Solving Heat equation
+Solving Heat equation with C using Finite Difference Method FDM
