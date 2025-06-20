@@ -20,6 +20,7 @@ main()
 #else
     printf( "DEF_INT64 is not defined.\n" );
 #endif
-
+    def_coeftype_t type = DefDouble;
+    printf( "%zu \n", def_size_of( type ) );
     return ierr;
 }

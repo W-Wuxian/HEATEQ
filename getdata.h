@@ -13,9 +13,7 @@
 #ifndef _getdata_h_
 #define _getdata_h_
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <def.h>
 
 int getdatafromfile( const char * );
 
