@@ -3,11 +3,15 @@
 
 #include "def.h"
 
-#define Sim2DFDMGeomLX 1
-#define Sim2DFDMGeomLY 1
-#define Sim2DFDMPhyD 1
-#define Sim2DFDMNX 1
-#define Sim2DFDMNY1
+#define Sim2DFDMGeomLX ( (def_fixdbl_t)1 )
+#define Sim2DFDMGeomLY ( (def_fixdbl_t)1 )
+#define Sim2DFDMPhyD ( (def_fixdbl_t)1 )
+#define Sim2DFDMTimeDT ( (def_fixdbl_t)1 )
+#define Sim2DFDMGeomNX ( (def_int_t)1 )
+#define Sim2DFDMGeomNY ( (def_int_t)1 )
+#define Sim2DFDMTimeMAXIT ( (def_int_t)1 )
+#define Sim2DFDMOptionVERBOSE ( (def_int_t)1 )
+#define Sim2DFDMOptionSrcTERM ( (def_int_t)1 )
 
 BEGIN_C_DECLS
 
@@ -15,16 +19,17 @@ BEGIN_C_DECLS
  * @brief Integer parameters
  */
 typedef enum sim_2d_fdm_iparm_e {
-    /* Geometry LX */
-    IPARM_GEOM_LX, /**< GEOM LX Default: Sim2DFDMGeomLX  */
-    /* Geometry LY */
-    IPARM_GEOM_LY, /**< GEOM LY Default: Sim2DFDMGeomLY  */
-    /* Physic D */
-    IPARM_PHY_D, /**< PHY D Default: Sim2DFDMPhyD        */
     /* Geometry NX */
-    IPARM_GEOM_NX, /**< GEOM NX Default: Sim2DFDMNX      */
+    IPARM_GEOM_NX, /**< Geommetry Number of points along X axis: NX ; Default: Sim2DFDMNX      */
     /* Geometry NY */
-    IPARM_GEOM_NY, /**< GEOM NY Default: Sim2DFDMNY      */
+    IPARM_GEOM_NY, /**< Geommetry Number of points along Y axis: NY Default: Sim2DFDMNY      */
+    /* Time MAXIT */
+    IPARM_TIME_MAXIT, /**< Time Max iteration number: MAXIT Default: Sim2DFDMTimeMAXIT     */
+    /* Option SOURCETERM */
+    IPARM_OPTION_SRCTERM, /**< Option Select hard-coded source term Default: Sim2DFDMOptionSrcTERM
+                           */
+    /* Option VERBOSE */
+    IPARM_OPTION_VERBOSE, /**< Option Display Solution, Errors... Default: Sim2DFDMOptionVERBOSE */
     IPARM_SIZE
 } sim_2d_fdm_iparm_t;
 
@@ -32,9 +37,14 @@ typedef enum sim_2d_fdm_iparm_e {
  * @brief Float parameters
  */
 typedef enum sim_dparm_e {
-    DPARM_FILL_IN,     /**< Maximum memory (-DMEMORY_USAGE)     Default: - OUT */
-    DPARM_LSS_TIME,    /**< Time for subtask LSS (wallclock)    Default: - OUT */
-    DPARM_SKETCH_TIME, /**< Time for subtask SKECTH (wallclock) Default: - OUT */
+    /* Geometry LX */
+    DPARM_GEOM_LX, /**< Geommetry Length along X axis: LX ; Default: Sim2DFDMGeomLX  */
+    /* Geometry LY */
+    DPARM_GEOM_LY, /**< Geommetry Length along Y axis: LY ; Default: Sim2DFDMGeomLY  */
+    /* Time DT */
+    DPARM_TIME_DT, /**< Time step DT ; Default: Sim2DFDMTimeDT        */
+    /* Physic D */
+    DPARM_PHY_D, /**< Physic Thermal diffusivity D ; Default: Sim2DFDMPhyD        */
     DPARM_SIZE
 } sim_dparm_t;
 
