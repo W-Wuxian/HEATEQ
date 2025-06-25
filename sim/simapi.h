@@ -1,7 +1,7 @@
 #ifndef _sim_simapi_h_
 #define _sim_simapi_h_
 
-#include "def.h"
+#include "../def.h"
 
 #define Sim2DFDMGeomLX ( (def_fixdbl_t)1 )
 #define Sim2DFDMGeomLY ( (def_fixdbl_t)1 )

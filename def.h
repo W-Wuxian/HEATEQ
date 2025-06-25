@@ -36,5 +36,5 @@ typedef uintptr_t DEF_Comm;
 
 // #include "def/api.h"
 #include "def/defdatatypes.h"
-
+#include "sim/simdatatypes.h"
 #endif /* _def_h_ */

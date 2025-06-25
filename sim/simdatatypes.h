@@ -1,8 +1,8 @@
 #ifndef _sim_simdatatypes_h_
 #define _sim_simdatatypes_h_
 
-#include "def.h"
-
+#include "../def.h"
+#include "simapi.h"
 //        Y,j
 //        ^
 //        |

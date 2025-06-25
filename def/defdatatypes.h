@@ -44,6 +44,8 @@ typedef int64_t  def_int_t;
 typedef uint64_t def_uint_t;
 #define DEF_MPI_INT MPI_INTEGER8
 #define DEF_INT_MAX INT64_MAX
+#define FSCANF_INPUT_FMT_D "%" SCNd64
+#define PRINTF_INPUT_FMT_D "%" PRId64
 
 #elif defined( DEF_INT32 )
 
@@ -51,6 +53,8 @@ typedef int32_t  def_int_t;
 typedef uint32_t def_uint_t;
 #define DEF_MPI_INT MPI_INTEGER8
 #define DEF_INT_MAX INT32_MAX
+#define FSCANF_INPUT_FMT_D "%" SCNd32
+#define PRINTF_INPUT_FMT_D "%" PRId32
 
 #elif defined( DEF_LONG )
 
@@ -58,13 +62,17 @@ typedef long          def_int_t;
 typedef unsigned long def_uint_t;
 #define DEF_MPI_INT MPI_LONG
 #define DEF_INT_MAX LONG_MAX
+#define FSCANF_INPUT_FMT_D "%ld"
+#define PRINTF_INPUT_FMT_D "%ld"
 
 #else
-
+#define DEFAULT_INT
 typedef int          def_int_t;
 typedef unsigned int def_uint_t;
 #define DEF_MPI_INT MPI_INT
 #define DEF_INT_MAX INT_MAX
+#define FSCANF_INPUT_FMT_D "%d"
+#define PRINTF_INPUT_FMT_D "%d"
 
 #endif /* DEF_INT64 */
 /**

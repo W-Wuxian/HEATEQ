@@ -49,70 +49,48 @@ int getdatafromfile( const char *restrict datafile, def_int_t *iparm, def_fixdbl
 int
 getdatafromfile( const char *restrict datafile, def_int_t *iparm, def_fixdbl_t *dparm )
 {
+    int   ierr = 0;
+    char  dataheader[255];
+    FILE *streamptr = { 0 };
     if ( datafile == NULL ) {
         fputs( "NULL data file name\n", stderr );
         exit( EXIT_FAILURE );
     }
-    int   ierr = 0;
-    char  buffer[256];
-    FILE *streamptr = { 0 };
-    streamptr       = fopen( datafile, "r" );
+    streamptr = fopen( datafile, "r" );
     if ( streamptr == NULL ) {
-        perror( "Error opening file" );
-        return -1;
+        perror( "error opening file\n" );
+        exit( EXIT_FAILURE );
     }
-    // Skip comment lines
-    while ( fgets( buffer, sizeof( buffer ), streamptr ) != NULL ) {
-        if ( buffer[0] != '#' ) {
-            break;
-        }
+    else {
+        SKIP_DATA_HEADER_FGETS
+        SKIP_DATA_HEADER_FGETS
+        ierr = fscanf( streamptr,
+                       FSCANF_INPUT_FMT_D FSCANF_INPUT_FMT_D,
+                       &iparm[IPARM_GEOM_NX],
+                       &iparm[IPARM_GEOM_NY] );
+        printf( " %ld %ld ierr=%d\n", iparm[IPARM_GEOM_NX], iparm[IPARM_GEOM_NY], ierr );
+        FSCANF_FAILED_MSG( ierr, 2 );
+        SKIP_DATA_HEADER_FGETS
+        ierr = fscanf( streamptr, "%ld", &iparm[IPARM_TIME_MAXIT] );
+        printf( " %ld \n", iparm[IPARM_TIME_MAXIT] );
+        FSCANF_FAILED_MSG( ierr, 1 );
+        SKIP_DATA_HEADER_FGETS
+        ierr = fscanf( streamptr, FSCANF_INPUT_FMT_D, &iparm[IPARM_OPTION_SRCTERM] );
+        FSCANF_FAILED_MSG( ierr, 1 );
+        SKIP_DATA_HEADER_FGETS
+        ierr = fscanf( streamptr, FSCANF_INPUT_FMT_D, &iparm[IPARM_OPTION_VERBOSE] );
+        FSCANF_FAILED_MSG( ierr, 1 );
+        SKIP_DATA_HEADER_FGETS
+        SKIP_DATA_HEADER_FGETS
+        ierr = fscanf( streamptr, "%lf %lf", &dparm[DPARM_GEOM_LX], &dparm[DPARM_GEOM_LY] );
+        FSCANF_FAILED_MSG( ierr, 2 );
+        SKIP_DATA_HEADER_FGETS
+        ierr = fscanf( streamptr, "%lf", &dparm[DPARM_TIME_DT] );
+        FSCANF_FAILED_MSG( ierr, 1 );
+        SKIP_DATA_HEADER_FGETS
+        ierr = fscanf( streamptr, "%lf", &dparm[DPARM_PHY_D] );
+        FSCANF_FAILED_MSG( ierr, 1 );
     }
-    sscanf( buffer,
-            FSCANF_INPUT_FMT_D FSCANF_INPUT_FMT_D,
-            &iparm[IPARM_GEOM_NX],
-            &iparm[IPARM_GEOM_NY] );
-
-    while ( fgets( buffer, sizeof( buffer ), streamptr ) != NULL ) {
-        if ( buffer[0] != '#' ) {
-            break;
-        }
-    }
-    sscanf( buffer, FSCANF_INPUT_FMT_D, &iparm[IPARM_TIME_MAXIT] );
-
-    while ( fgets( buffer, sizeof( buffer ), streamptr ) != NULL ) {
-        if ( buffer[0] != '#' ) {
-            break;
-        }
-    }
-    sscanf( buffer, FSCANF_INPUT_FMT_D, &iparm[IPARM_OPTION_SRCTERM] );
-
-    while ( fgets( buffer, sizeof( buffer ), streamptr ) != NULL ) {
-        if ( buffer[0] != '#' ) {
-            break;
-        }
-    }
-    sscanf( buffer, FSCANF_INPUT_FMT_D, &iparm[IPARM_OPTION_VERBOSE] );
-
-    while ( fgets( buffer, sizeof( buffer ), streamptr ) != NULL ) {
-        if ( buffer[0] != '#' ) {
-            break;
-        }
-    }
-    sscanf( buffer, "%lf %lf", &dparm[DPARM_GEOM_LX], &dparm[DPARM_GEOM_LY] );
-
-    while ( fgets( buffer, sizeof( buffer ), streamptr ) != NULL ) {
-        if ( buffer[0] != '#' ) {
-            break;
-        }
-    }
-    sscanf( buffer, "%lf", &dparm[DPARM_TIME_DT] );
-
-    while ( fgets( buffer, sizeof( buffer ), streamptr ) != NULL ) {
-        if ( buffer[0] != '#' ) {
-            break;
-        }
-    }
-    sscanf( buffer, "%lf", &dparm[DPARM_PHY_D] );
     fclose( streamptr );
     return ierr;
 }
