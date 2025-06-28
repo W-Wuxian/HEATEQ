@@ -1,5 +1,4 @@
 # IPARM Integer like parameters
-4 4
 # NX NY Geommetry Number of points along X and Y axis
 10 10
 # MAXIT Time Max iteration number

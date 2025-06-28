@@ -1,7 +1,7 @@
 #-ffpe-trap=invalid,zero,overflow,underflow,inexact,denormal
 CC=gcc
 INTTYPE=-DDEF_INT64=1 -DTEST
-DEBUG=-Wall -fbounds-check -pedantic -g3 -DDEF_INT64=1
+DEBUG=-Wall -fbounds-check -pedantic -g3
 EXT=
 COMPILE=$(CC) $(DEBUG) $(EXT) $(INTTYPE)
 EXECNAME=C-SEQ-FDM

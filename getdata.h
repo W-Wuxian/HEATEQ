@@ -15,35 +15,6 @@
 
 #include "def.h"
 
-#define FSCANF_FAILED_MSG( a, b )                                                                  \
-    if ( a != b ) {                                                                                \
-        fputs( "Failed to fscanf data from file!\n", stderr );                                     \
-        printf( "line number %d in file %s\n", __LINE__, __FILE__ );                               \
-        printf( "a %d b %d\n", a, b );                                                             \
-        exit( EXIT_FAILURE );                                                                      \
-    }
-
-#define SKIP_DATA_HEADER                                                                           \
-    ierr = fscanf( streamptr, "%s", dataheader );                                                  \
-    printf( "line number %d in file %s\n", __LINE__, __FILE__ );                                   \
-    printf( "ierr %d SKIP_DATA_HEADER %s\n", ierr, dataheader );                                   \
-    FSCANF_FAILED_MSG( ierr, 1 );
-
-#define FGETS_FAILED_MSG( a )                                                                      \
-    {                                                                                              \
-        if ( a == NULL ) {                                                                         \
-            fputs( "Failed to fgets data from file!\n", stderr );                                  \
-            printf( "line number %d in file %s\n", __LINE__, __FILE__ );                           \
-            exit( EXIT_FAILURE );                                                                  \
-        }                                                                                          \
-    }                                                                                              \
-    while ( 0 )
-
-#define SKIP_DATA_HEADER_FGETS                                                                     \
-    printf( "line number %d in file %s\n", __LINE__, __FILE__ );                                   \
-    FGETS_FAILED_MSG( fgets( dataheader, sizeof( dataheader ), streamptr ) );                      \
-    printf( "SKIP_DATA_HEADER_FGETS %s\n", dataheader );
-
 int getdatafromfile( const char *restrict datafile, def_int_t *iparm, def_fixdbl_t *dparm );
 
 int

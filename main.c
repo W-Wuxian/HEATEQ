@@ -29,18 +29,26 @@ main()
     def_coeftype_t type = DefDouble;
     printf( "%zu \n", def_size_of( type ) );
 
-    def_int_t    iparm[IPARM_SIZE];
-    def_fixdbl_t dparm[DPARM_SIZE];
+    // def_int_t    iparm[IPARM_SIZE];
+    // def_fixdbl_t dparm[DPARM_SIZE];
+    CREATE_IPARM( iparm );
+    CREATE_DPARM( dparm );
     ierr = getdatafromfile( "./DATA.dat", &iparm[0], &dparm[0] );
-    printf( "%d " PRINTF_INPUT_FMT_D " " PRINTF_INPUT_FMT_D " " PRINTF_INPUT_FMT_D
-            " " PRINTF_INPUT_FMT_D " " PRINTF_INPUT_FMT_D "\n",
+    printf( "iparm lenght %d\nNX " PRINTF_INPUT_FMT_D "\nNY " PRINTF_INPUT_FMT_D
+            "\nMAXIT " PRINTF_INPUT_FMT_D "\nSRCTERM " PRINTF_INPUT_FMT_D
+            "\nVERBOSE " PRINTF_INPUT_FMT_D "\n",
             IPARM_SIZE,
             iparm[0],
             iparm[1],
             iparm[2],
             iparm[3],
             iparm[4] );
-    printf( "%d\n", DPARM_SIZE );
-    //    getdatafromfile return ierr;
+    printf( "dparm lenght %d\nLX %lf\nLY %lf\nDT %lf\nD %lf\n",
+            DPARM_SIZE,
+            dparm[0],
+            dparm[1],
+            dparm[2],
+            dparm[3] );
+
     return ierr;
 }
