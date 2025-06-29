@@ -6,12 +6,12 @@
 #define Sim2DFDMGeomLX ( (def_fixdbl_t)1 )
 #define Sim2DFDMGeomLY ( (def_fixdbl_t)1 )
 #define Sim2DFDMPhyD ( (def_fixdbl_t)1 )
-#define Sim2DFDMTimeDT ( (def_fixdbl_t)1 )
-#define Sim2DFDMGeomNX ( (def_int_t)1 )
-#define Sim2DFDMGeomNY ( (def_int_t)1 )
-#define Sim2DFDMTimeMAXIT ( (def_int_t)1 )
+#define Sim2DFDMTimeDT ( (def_fixdbl_t)0.1 )
+#define Sim2DFDMGeomNX ( (def_int_t)2 )
+#define Sim2DFDMGeomNY ( (def_int_t)2 )
+#define Sim2DFDMTimeMAXIT ( (def_int_t)10 )
 #define Sim2DFDMOptionVERBOSE ( (def_int_t)1 )
-#define Sim2DFDMOptionSrcTERM ( (def_int_t)1 )
+#define Sim2DFDMOptionSRCTERM ( (def_int_t)1 )
 
 BEGIN_C_DECLS
 
@@ -26,7 +26,7 @@ typedef enum sim_2d_fdm_iparm_e {
     /* Time MAXIT */
     IPARM_TIME_MAXIT, /**< Time Max iteration number: MAXIT Default: Sim2DFDMTimeMAXIT     */
     /* Option SOURCETERM */
-    IPARM_OPTION_SRCTERM, /**< Option Select hard-coded source term Default: Sim2DFDMOptionSrcTERM
+    IPARM_OPTION_SRCTERM, /**< Option Select hard-coded source term Default: Sim2DFDMOptionSRCTERM
                            */
     /* Option VERBOSE */
     IPARM_OPTION_VERBOSE, /**< Option Display Solution, Errors... Default: Sim2DFDMOptionVERBOSE */
@@ -47,6 +47,15 @@ typedef enum sim_dparm_e {
     DPARM_PHY_D, /**< Physic Thermal diffusivity D ; Default: Sim2DFDMPhyD        */
     DPARM_SIZE
 } sim_dparm_t;
+
+/**
+ * @brief grid order parameters
+ */
+typedef enum sim_gridorder_e {
+    GRID_ORDER_PIJ,     /**< P_{ij}  order w/ i=1,nx-1 j=1,ny-1 with k=(i-1)(ny-2)j */
+    GRID_ORDER_PJI,     /**< P_{ji} order w/ j=1,ny-1 i=1,nx-1 with k=(j-1)(nx-2)i  */
+    GRID_ORDER_HILBERT, /**< P_{Hilbertian distrib}      */
+} sim_gridorder_t;
 
 END_C_DECLS
 

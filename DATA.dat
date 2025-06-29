@@ -1,6 +1,6 @@
 # IPARM Integer like parameters
 # NX NY Geommetry Number of points along X and Y axis
-10 10
+2 2
 # MAXIT Time Max iteration number
 5
 # SRCTERM Option Select hard-coded source term
